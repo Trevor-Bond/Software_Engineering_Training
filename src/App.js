@@ -2,6 +2,7 @@ import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 import { useState } from "react";
 import AddUser from "./components/Users/AddUser";
+import UsersList from "./components/Users/UsersList";
 
 const DUMMY_EXPENSES = [
   {
@@ -27,6 +28,16 @@ const DUMMY_EXPENSES = [
 
 const App = () => {
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+  const [usersList, setUsersList] = useState([]);
+
+  const addUserHandler = (uName, uAge) => {
+    setUsersList((prevUsersList) => {
+      return [
+        ...prevUsersList,
+        { name: uName, age: uAge, id: Math.random().toString() },
+      ];
+    });
+  };
 
   const addExpenseHandler = (expense) => {
     setExpenses((prevExpenses) => {
@@ -38,8 +49,8 @@ const App = () => {
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses items={expenses} />
-      <AddUser />
-      <UsersList users={[]} />
+      <AddUser onAddUser={addUserHandler} />
+      <UsersList users={usersList} />
     </div>
   );
 };
