@@ -1,58 +1,35 @@
-import Expenses from "./components/Expenses/Expenses";
-import NewExpense from "./components/NewExpense/NewExpense";
 import { useState } from "react";
-import AddUser from "./components/Users/AddUser";
-import UsersList from "./components/Users/UsersList";
+import Header from "./components/Layout/Header";
+import Meals from "./components/Meals/Meals";
+import Cart from "./components/Cart/Cart";
+import CartProvider from "./store/CartProvider";
 
-const DUMMY_EXPENSES = [
-  {
-    id: "e1",
-    title: "Toilet Paper",
-    amount: 94.12,
-    date: new Date(2020, 7, 14),
-  },
-  { id: "e2", title: "New TV", amount: 799.49, date: new Date(2021, 2, 12) },
-  {
-    id: "e3",
-    title: "Car Insurance",
-    amount: 294.67,
-    date: new Date(2021, 2, 28),
-  },
-  {
-    id: "e4",
-    title: "New Desk (Wooden)",
-    amount: 450,
-    date: new Date(2021, 5, 12),
-  },
-];
+function App() {
+  // Cart modal handler
+  const [cartIsShown, setCartIsShown] = useState(false);
 
-const App = () => {
-  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
-  const [usersList, setUsersList] = useState([]);
-
-  const addUserHandler = (uName, uAge) => {
-    setUsersList((prevUsersList) => {
-      return [
-        ...prevUsersList,
-        { name: uName, age: uAge, id: Math.random().toString() },
-      ];
-    });
+  const showCartHandler = () => {
+    setCartIsShown(true);
   };
 
-  const addExpenseHandler = (expense) => {
-    setExpenses((prevExpenses) => {
-      return [expense, ...prevExpenses];
-    });
+  const hideCartHandler = () => {
+    setCartIsShown(false);
   };
 
   return (
-    <div>
-      <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses items={expenses} />
-      <AddUser onAddUser={addUserHandler} />
-      <UsersList users={usersList} />
-    </div>
+    // React Context Usage
+    // Used to show current cart contents
+    // More informations in CartProvider.js
+    <CartProvider>
+      {cartIsShown && <Cart onHideCart={hideCartHandler} />}
+
+      {/* Header: Navbar w/ title, cart icon and image below */}
+      <Header onShowCart={showCartHandler} />
+      <main>
+        <Meals />
+      </main>
+    </CartProvider>
   );
-};
+}
 
 export default App;
