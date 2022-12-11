@@ -1,7 +1,9 @@
 {
     "compilerOptions": {
-       "target": "es5",
+       "target": "es6",
        "outDir": "dist" 
     },
-    "include": ["**/*.ts"]
+    "include": ["**/*.ts"],
+    "strict": true,
+    "esModuleInterop": true
 }
