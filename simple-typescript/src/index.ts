@@ -1,5 +1,11 @@
-function log(str: string) {
+export function log(str: string) {
   console.log(str);
 }
 
-log("Hello World!!!");
+log('Hello World');
+
+class A {
+  greeting = 'Hello World';
+}
+
+console.log(new A().greeting);
