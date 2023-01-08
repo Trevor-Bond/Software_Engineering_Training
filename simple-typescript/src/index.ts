@@ -1,8 +1,6 @@
-type Alias1 = string | string[] | null;
-type Alias2 = { a: number } & { b: number };
-type Alias3<T> = T[];
-
-type Alias4 = {
-  a: number;
-  b: number;
-};
+import "./Declaration-Merging-1";
+import "./Declaration-Merging-2";
+import "./Declaration-Merging-3";
+import "./Declaration-Merging-4";
+import "./Declaration-Merging-5";
+import "./Declaration-Merging-6";
